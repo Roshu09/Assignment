@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Directory</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+
+  .heading {
+    text-align: center;
+    margin: 40px;
+}
+
+  .doctor-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
+  }
+  .doctor-item {
+    text-align: center;
+    position: relative; 
+  }
+  .doctor-item img {
+    width: 220px;
+    height: 200px;
+    margin-bottom: 10px;
+    border-radius: 10%;
+    transition: transform 0.2s, border-color 0.2s; 
+  }
+  .doctor-item:hover img {
+    border: 2px solid rgb(154, 221, 221); 
+    transform: scale(1.1); 
+  }
+  .doctor-item div {
+    background-color: #f0f0f0; 
+    padding: 10px 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s; }
+
+  .doctor-item:hover div {
+    background-color: rgb(177, 232, 232); 
+  }
+
+  @media only screen and (max-width: 375px) {
+    .doctor-grid {
+      grid-template-columns: repeat(2, 1fr); 
+    }
+    .doctor-item img{
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    doctor-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h1 class="heading">Select Doctors</h1>
+  <div class="doctor-grid" id="doctorGrid">
+
+</div>
+</div>
+
+<script>
+
+var doctorData = [
+    { "name": "Dr. Jyotsna Joshi", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/32.png", "speciality": "Dermatologist" },
+    { "name": "Dr. Usha M Kumar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/30.jpg", "speciality": "Gynecologist" },
+    { "name": "Dr. Mayank Somani", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/71.jpg", "speciality": "Diabetologist " },
+    { "name": "Dr. Vishal Khullar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/56.jpg", "speciality": "Cardiac Surgeon" },
+    { "name": "Dr. Anisha Seth Gupta", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/61.jpg", "speciality": "ophthalmologist" },
+    { "name": "Dr. Preeti Yadav", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/77_thumbnail.jpg", "speciality": "Plastic Surgeon" },
+    { "name": "Dr. Ankit Potdar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/47_thumbnail.jpg", "speciality": "General Surgeon" },
+    { "name": "Dr. Usha M Kumar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/30.jpg", "speciality": "Gynecologist" },
+    { "name": "Dr. Devi Prasad Shetty", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/83.jpg", "speciality": "Cardiac Surgeon" },
+    { "name": "Dr. Jyotsna Joshi", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/32.png", "speciality": "Dermatologist" },
+    { "name": "Dr. Usha M Kumar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/30.jpg", "speciality": "Gynecologist" },
+    { "name": "Dr. Mayank Somani", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/71.jpg", "speciality": "Diabetologist " },
+    { "name": "Dr. Vishal Khullar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/56.jpg", "speciality": "Cardiac Surgeon" },
+    { "name": "Dr. Anisha Seth Gupta", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/61.jpg", "speciality": "ophthalmologist" },
+    { "name": "Dr. Preeti Yadav", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/77_thumbnail.jpg", "speciality": "Plastic Surgeon" },
+    { "name": "Dr. Ankit Potdar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/47_thumbnail.jpg", "speciality": "General Surgeon" },
+    { "name": "Dr. Usha M Kumar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/30.jpg", "speciality": "Gynecologist" },
+    { "name": "Dr. Devi Prasad Shetty", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/83.jpg", "speciality": "Cardiac Surgeon" },
+    { "name": "Dr. Jyotsna Joshi", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/32.png", "speciality": "Dermatologist" },
+    { "name": "Dr. Usha M Kumar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/30.jpg", "speciality": "Gynecologist" },
+    { "name": "Dr. Mayank Somani", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/71.jpg", "speciality": "Diabetologist " },
+    { "name": "Dr. Vishal Khullar", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/56.jpg", "speciality": "Cardiac Surgeon" },
+    { "name": "Dr. Anisha Seth Gupta", "photo": "https://indiadoctorsdirectory.com/oc-content/uploads/3/61.jpg", "speciality": "ophthalmologist" },
+    
+  ];
+
+  function loadDoctors() {
+    var doctorGrid = document.getElementById('doctorGrid');
+    doctorData.forEach(function(doctor) {
+      var doctorItem = document.createElement('div');
+      doctorItem.classList.add('doctor-item');
+      
+      var img = document.createElement('img');
+      img.src = doctor.photo;
+      img.alt = doctor.name;
+      doctorItem.appendChild(img);
+      
+      var name = document.createElement('div');
+      name.textContent = doctor.name;
+      doctorItem.appendChild(name);
+      
+      var speciality = document.createElement('div');
+      speciality.textContent = doctor.speciality;
+      doctorItem.appendChild(speciality);
+      
+      doctorGrid.appendChild(doctorItem);
+    });
+  }
+
+  loadDoctors();
+</script>
+
+</body>
+</html>
